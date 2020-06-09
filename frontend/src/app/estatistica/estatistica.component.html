@@ -1,0 +1,153 @@
+<div id="mainDiv">
+  <!-- <a-lancamento id="lancamento"></a-lancamento> -->
+  <div class="col-lg-4 col-xs-12">
+    <div class="small-box bg-transparent">
+      <div classe="inner"></div>
+      <p>Seus lucros</p>
+      <h3>R$ 3500,00</h3>
+      <p style="color: deepskyblue;">+12,94%</p>
+      <div class="icon">
+        <i class="glyphicon glyphicon-usd"></i>
+      </div>
+    </div>
+  </div>
+  <div id="funcDiv">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Lançamento diário</h3>
+      </div>
+      <div class="box-body">
+        <form>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              id="inputReceita"
+              placeholder="Receita(R$)"
+              name="receitaObtida"
+              [(ngModel)]="lancamento.receitaObtida"
+              class="form-control"
+            />
+            <span class="glyphicon glyphicon-usd form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              id="inputQuantidadeViagens"
+              placeholder="Quantidade de Viagens"
+              name="quantidadeViagens"
+              [(ngModel)]="lancamento.quantidadeViagens"
+              class="form-control"
+            />
+            <span
+              class="glyphicon glyphicon-stats form-control-feedback"
+            ></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              id="inputQuilometros"
+              placeholder="Quilometros Rodados"
+              name="quilometrosRodados"
+              [(ngModel)]="lancamento.quilometrosRodados"
+              class="form-control"
+            />
+            <span class="glyphicon glyphicon-road form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              class="form-control"
+              id="inputValorCombustivel"
+              placeholder="Valor combustível(R$)"
+              name="valorCombustivel"
+              [(ngModel)]="lancamento.valorCombustivel"
+            />
+            <span class="glyphicon glyphicon-usd form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              id="inputConsumoVeiculo"
+              placeholder="Consumo/km do veículo"
+              name="consumoVeiculo"
+              [(ngModel)]="lancamento.consumoVeiculo"
+              class="form-control"
+            />
+            <span
+              class="glyphicon glyphicon-scale form-control-feedback"
+            ></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input
+              type="number"
+              id="inputHorasTrabalhadas"
+              placeholder="Horas trabalhadas"
+              name="horasTrabalhadas"
+              [(ngModel)]="lancamento.horasTrabalhadas"
+              class="form-control"
+            />
+            <span
+              class="glyphicon glyphicon-hourglass form-control-feedback"
+            ></span>
+          </div>
+        </form>
+        <button
+          type="button"
+          class="btn btn-default btn-block btn-flat btn-primary"
+          (click)="realizarLancamento()"
+        >
+          Realiza Lançamento
+        </button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Calendário de metas</h3>
+      </div>
+      <div class="box-body">
+        <p-fullCalendar
+          [events]="events"
+          [options]="optionsCalendar"
+        ></p-fullCalendar>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Redefinir meta</h3>
+      </div>
+      <div class="box-body" id="boxTeste">
+        <h3>R$: {{ val }}</h3>
+        <p-slider
+          [style]="{ height: '14em' }"
+          orientation="vertical"
+          [(ngModel)]="val"
+          [min]="500"
+          [max]="5000"
+          [step]="100"
+        ></p-slider>
+        <hr />
+        <button
+          type="button"
+          class="btn btn-default btn-block btn-flat btn-primary"
+          (click)="redefinirMeta()"
+        >
+          Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="box" id="boxGrafico">
+    <div class="box-header with-border">
+      <h3 class="box-title">Gráfico (Lucro x Gasto)</h3>
+    </div>
+    <div class="box-body">
+      <p-chart
+        type="line"
+        [data]="dataGrafico"
+        [options]="optionsGrafico"
+        [height]="350"
+      ></p-chart>
+    </div>
+  </div>
+</div>

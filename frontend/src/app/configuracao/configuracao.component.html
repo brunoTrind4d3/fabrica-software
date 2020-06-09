@@ -1,0 +1,208 @@
+<hr />
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Informações do usuário</h3>
+  </div>
+  <div class="box-body">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-12 ui-lg-9">
+        <span class="ui-float-label">
+          <input
+            id="float-input"
+            type="text"
+            size="30"
+            [(ngModel)]="usuario.nome"
+            pInputText
+          />
+          <label for="float-input">Nome</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-3">
+        <span class="ui-float-label">
+          <p-inputMask
+            mask="99/99/9999"
+            [(ngModel)]="usuario.dataNascimento"
+          ></p-inputMask>
+          <label for="float-input">Data nascimento</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            id="float-input"
+            type="text"
+            size="30"
+            [(ngModel)]="usuario.endereco"
+            pInputText
+          />
+          <label for="float-input">Endereço</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            id="float-input"
+            type="text"
+            size="30"
+            [(ngModel)]="usuario.complementoEndereco"
+            pInputText
+          />
+          <label for="float-input">Complemento</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <p-dropdown
+            id="float-input"
+            [options]="estados"
+            [(ngModel)]="estado"
+            optionLabel="nome"
+            [filter]="true"
+            (onChange)="carregarCidades()"
+          ></p-dropdown>
+          <label for="float-input">UF</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <p-dropdown
+            id="float-input"
+            [options]="cidades"
+            [(ngModel)]="cidade"
+            optionLabel="nome"
+            [filter]="true"
+          ></p-dropdown>
+
+          <label for="float-input">Cidade</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-6">
+        <span class="ui-float-label">
+          <input id="float-input" type="email" size="30" pInputText />
+          <label for="float-input">Email</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-3">
+        <span class="ui-float-label">
+          <p-inputMask
+            mask="(99) 99999-9999"
+            [(ngModel)]="usuario.telefone"
+          ></p-inputMask>
+          <label for="float-input">Celular</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-3">
+        <span class="ui-float-label">
+          <p-inputMask
+            mask="999.999.999-99"
+            [(ngModel)]="usuario.cpf"
+          ></p-inputMask>
+          <label for="float-input">CPF</label>
+        </span>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-default btn-block btn-flat btn-primary"
+      (click)="alterarUsuario()"
+    >
+      Alterar
+    </button>
+  </div>
+</div>
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Informações do veículo</h3>
+  </div>
+  <div class="box-body">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-12 ui-lg-3">
+        <span class="ui-float-label">
+          <p-dropdown
+            id="float-input"
+            [options]="marcas"
+            [(ngModel)]="marca"
+            optionLabel="name"
+            [filter]="true"
+            (onChange)="carregarModelos()"
+          ></p-dropdown>
+          <label for="float-input">Marca</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-6">
+        <span class="ui-float-label">
+          <p-dropdown
+            id="float-input"
+            [options]="modelos"
+            [(ngModel)]="modelo"
+            optionLabel="name"
+            [filter]="true"
+          ></p-dropdown>
+
+          <label for="float-input">Modelo</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            type="text"
+            pKeyFilter="int"
+            pInputText
+            [(ngModel)]="veiculo.ano"
+          />
+          <label for="float-input">Ano Veículo</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <p-inputMask
+            mask="****-9*99"
+            [(ngModel)]="veiculo.placa"
+          ></p-inputMask>
+          <label for="float-input">Placa veículo</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            type="text"
+            pKeyFilter="int"
+            pInputText
+            [(ngModel)]="veiculo.quilometragem"
+          />
+          <label for="float-input">Quilometragem</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            type="text"
+            pKeyFilter="int"
+            pInputText
+            [(ngModel)]="veiculo.ipva"
+          />
+          <label for="float-input">IPVA/ano</label>
+        </span>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <span class="ui-float-label">
+          <input
+            type="text"
+            pKeyFilter="int"
+            pInputText
+            [(ngModel)]="veiculo.manutencao"
+          />
+          <label for="float-input">Manutenção/mês</label>
+        </span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-default btn-block btn-flat btn-primary"
+        (click)="alterarVeiculo()"
+      >
+        Alterar
+      </button>
+    </div>
+  </div>
+</div>

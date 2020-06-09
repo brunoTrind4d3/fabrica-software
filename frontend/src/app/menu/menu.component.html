@@ -1,0 +1,40 @@
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <div class="user-panel">
+      <div class="pull image">
+        <img
+          src="https://static.netshoes.com.br/produtos/chuteira-society-kappa-torpedo/06/D24-1338-006/D24-1338-006_zoom1.jpg?ts=1572636217&ims=326x"
+          class="profile-user-img img-responsive img-circle"
+          style="max-width: 130px;"
+          alt="Teste"
+        />
+      </div>
+    </div>
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="active treeview">
+        <a href="#">
+          <i class="fa fa-user"></i> <span>Bem-vindo,</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="active" routerLinkActive="active">
+            <a [routerLink]="['/estatistica']"
+              ><i class="fa fa-bar-chart"></i>Estatísticas</a
+            >
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/configuracao']"
+              ><i class="fa fa-cog"></i>Configuração</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,64 @@
+.small-box:hover {
+  color: black;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.box {
+  max-width: 33%;
+}
+
+#mainDiv {
+  max-width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#funcDiv {
+  max-width: 100%;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+#boxGrafico {
+  max-width: 100%;
+}
+
+#boxTeste {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+@media only screen and (max-width: 800px) {
+  #funcDiv {
+    max-width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #mainDiv {
+    max-width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .box {
+    max-width: 100%;
+  }
+  #boxGrafico {
+    max-width: 100%;
+  }
+
+  #lancamento {
+    visibility: hidden;
+  }
+}
