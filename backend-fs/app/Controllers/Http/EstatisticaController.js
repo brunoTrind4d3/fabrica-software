@@ -31,11 +31,11 @@ class EstatisticaController {
     const novaData = new Date();
     console.log(getDayOfYear(created_at));
     console.log(getDayOfYear(novaData));
-    // if (getDayOfYear(created_at) === getDayOfYear(novaData)) {
-    //   return response
-    //     .status(400)
-    //     .json({ error: "Lancamento diario ja realizado" });
-    // }
+    if (getDayOfYear(created_at) === getDayOfYear(novaData)) {
+      return response
+        .status(400)
+        .json({ error: "Lancamento diario ja realizado" });
+    }
     const receita = receitaObtida;
     const lancamento = await Estatistica.create({
       user_id,
@@ -93,6 +93,43 @@ class EstatisticaController {
       ],
     };
     return { data };
+  }
+
+  async calcularLucro(request, response) {
+    const { id } = request.params;
+
+    const lancamentos = await Estatistica.query().where("user_id", id).fetch();
+
+    const mes = lancamentos.rows.filter((lancamento) => {
+      return getMonth(lancamento.created_at) === getMonth(new Date());
+    });
+
+    const lucros = [];
+
+    mes.map((m) => {
+      lucros.push(parseInt(m.receita));
+    });
+
+    const gastos = [];
+    mes.map((m) => {
+      gastos.push(
+        (m.quilometrosRodados / m.consumoVeiculo) * m.valorCombustivel
+      );
+    });
+
+    let lucroTotal = 0;
+    lucros.map((l) => {
+      lucroTotal += parseInt(l);
+    });
+
+    console.log(lucroTotal);
+    let gastoTotal = 0;
+    gastos.map((g) => {
+      gastoTotal += parseInt(g);
+    });
+
+    console.log(gastoTotal);
+    return lucroTotal - gastoTotal;
   }
 }
 

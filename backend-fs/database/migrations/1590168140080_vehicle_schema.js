@@ -13,6 +13,9 @@ class VehicleSchema extends Schema {
       table.string("carPlate").notNullable().unique();
       table.bigInteger("kilometer").notNullable();
       table.integer("year").notNullable();
+      table.integer("ipva").notNullable();
+      table.integer("manutencao").notNullable();
+
       table.timestamps();
     });
   }

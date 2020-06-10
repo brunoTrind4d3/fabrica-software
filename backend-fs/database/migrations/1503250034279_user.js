@@ -11,6 +11,10 @@ class UserSchema extends Schema {
       table.string("email", 254).notNullable().unique();
       table.string("password", 60).notNullable();
       table.integer("goal").nullable().defaultTo(500);
+      table.date("birthDate").nullable();
+      table.string("mobilePhone", 60).nullable();
+      table.string("cpf", 60).nullable();
+
       table.timestamps();
     });
   }

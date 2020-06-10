@@ -22,6 +22,9 @@ Route.post("register", "UserController.store");
 Route.get("user", "UserController.index").middleware(["auth"]);
 Route.put("user", "UserController.update").middleware(["auth"]);
 
+Route.put("address", "AddressController.update").middleware(["auth"]);
+Route.get("address", "AddressController.index").middleware(["auth"]);
+
 Route.put("estatistica", "EstatisticaController.redefinirMeta").middleware([
   "auth",
 ]);
@@ -29,5 +32,9 @@ Route.post("estatistica", "EstatisticaController.lancamentoDiario").middleware([
   "auth",
 ]);
 Route.get("estatistica", "EstatisticaController.montarGrafico").middleware([
+  "auth",
+]);
+
+Route.get("estatistica/:id", "EstatisticaController.calcularLucro").middleware([
   "auth",
 ]);
