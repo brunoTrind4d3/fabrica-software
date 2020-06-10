@@ -16,10 +16,7 @@ import Swal from "sweetalert2";
 })
 export class EstatisticaComponent implements OnInit {
   val: number;
-
-  events: any[];
-  optionsCalendar: any;
-  locale: any;
+  lucro: number;
 
   dataGrafico: any;
   optionsGrafico: any;
@@ -32,18 +29,7 @@ export class EstatisticaComponent implements OnInit {
   ngOnInit() {
     const { user } = JSON.parse(localStorage.getItem("currentUser"));
     this.val = user.goal;
-    this.optionsCalendar = {
-      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      defaultDate: new Date(),
-      header: {
-        left: "prev,next",
-        center: "title",
-        right: "month,agendaWeek,agendaDay",
-      },
-      editable: true,
-      locale: ptBr,
-    };
-
+    this.calcularLucro();
     this.montarGrafico();
 
     this.schema = Yup.object().shape({
@@ -102,6 +88,14 @@ export class EstatisticaComponent implements OnInit {
   async montarGrafico() {
     const response = await api.get("/estatistica");
     this.dataGrafico = response.data.data;
+  }
+
+  async calcularLucro() {
+    const { user } = JSON.parse(localStorage.getItem("currentUser"));
+
+    const response = await api.get(`/estatistica/${user.id}`);
+    console.log(response.data);
+    this.lucro = response.data;
   }
 
   async redefinirMeta() {

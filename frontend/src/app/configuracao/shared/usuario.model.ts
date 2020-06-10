@@ -1,13 +1,10 @@
 export class Usuario {
   id: number;
-  nome: string;
+  username: string;
+  email: string;
   cpf: string;
-  dataNascimento: Date;
-  telefone: string;
-  estado: string;
-  cidade: string;
-  endereco: string;
-  complementoEndereco: string;
+  birthDate: Date;
+  mobilePhone: string;
 
   constructor() {}
 }

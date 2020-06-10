@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Veiculo } from "./shared/veiculo.model";
 import { Usuario } from "./shared/usuario.model";
+import { Endereco } from "./shared/endereco.model";
+import api from "../_services/api";
+
 import { ConfiguracaoService } from "./configuracao.service";
+import Swal from "sweetalert2";
 
 interface Estado {
   id: number;
@@ -30,6 +34,7 @@ interface Modelo {
 export class ConfiguracaoComponent implements OnInit {
   usuario: Usuario;
   veiculo: Veiculo;
+  endereco: Endereco;
 
   marcas = [];
   marca: Marca;
@@ -48,8 +53,10 @@ export class ConfiguracaoComponent implements OnInit {
   ngOnInit() {
     this.usuario = new Usuario();
     this.veiculo = new Veiculo();
+    this.endereco = new Endereco();
     this.carregarEstados();
     this.carregarMarcas();
+    this.carregarUsuario();
   }
 
   carregarEstados() {
@@ -83,10 +90,43 @@ export class ConfiguracaoComponent implements OnInit {
     });
   }
 
-  alterarUsuario() {
-    this.usuario.estado = this.estado.sigla;
-    this.usuario.cidade = this.cidade.nome;
+  async carregarUsuario() {
+    const response = await api.get("/user");
+    this.usuario = response.data;
+
+    const responseAddress = await api.get("/address");
+    console.log(responseAddress);
+    this.endereco.logradouro = responseAddress.data.logradouro;
+    this.endereco.complemento = responseAddress.data.complemento;
+    this.endereco.uf = responseAddress.data.uf;
+    this.estado.sigla = this.endereco.uf;
+    this.endereco.cidade = responseAddress.data.cidade;
+    this.cidade.nome = this.endereco.cidade;
+  }
+
+  async alterarUsuario() {
+    this.endereco.uf = this.estado.sigla;
+    this.endereco.cidade = this.cidade.nome;
     console.log(JSON.stringify(this.usuario));
+    console.log(JSON.stringify(this.endereco));
+
+    const responseUser = await api.put("/user", this.usuario);
+    const responseAddress = await api.put("/address", this.endereco);
+
+    if (responseUser.status === 200 && responseAddress.status === 200) {
+      Swal.fire({
+        title: "Sucesso",
+        text: "Sucesso ao atualizar os dados!",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Erro",
+        text: "Falha ao atualizar os dados!",
+        icon: "error",
+        showCancelButton: true,
+      });
+    }
   }
 
   alterarVeiculo() {

@@ -11,7 +11,7 @@
             id="float-input"
             type="text"
             size="30"
-            [(ngModel)]="usuario.nome"
+            [(ngModel)]="usuario.username"
             pInputText
           />
           <label for="float-input">Nome</label>
@@ -21,7 +21,7 @@
         <span class="ui-float-label">
           <p-inputMask
             mask="99/99/9999"
-            [(ngModel)]="usuario.dataNascimento"
+            [(ngModel)]="usuario.birthDate"
           ></p-inputMask>
           <label for="float-input">Data nascimento</label>
         </span>
@@ -32,7 +32,7 @@
             id="float-input"
             type="text"
             size="30"
-            [(ngModel)]="usuario.endereco"
+            [(ngModel)]="endereco.logradouro"
             pInputText
           />
           <label for="float-input">Endereço</label>
@@ -44,7 +44,7 @@
             id="float-input"
             type="text"
             size="30"
-            [(ngModel)]="usuario.complementoEndereco"
+            [(ngModel)]="endereco.complemento"
             pInputText
           />
           <label for="float-input">Complemento</label>
@@ -79,7 +79,14 @@
       </div>
       <div class="ui-g-12 ui-md-12 ui-lg-6">
         <span class="ui-float-label">
-          <input id="float-input" type="email" size="30" pInputText />
+          <input
+            id="float-input"
+            type="email"
+            size="30"
+            [(ngModel)]="usuario.email"
+            disabled
+            pInputText
+          />
           <label for="float-input">Email</label>
         </span>
       </div>
@@ -87,7 +94,7 @@
         <span class="ui-float-label">
           <p-inputMask
             mask="(99) 99999-9999"
-            [(ngModel)]="usuario.telefone"
+            [(ngModel)]="usuario.mobilePhone"
           ></p-inputMask>
           <label for="float-input">Celular</label>
         </span>

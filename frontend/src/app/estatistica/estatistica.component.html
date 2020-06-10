@@ -4,8 +4,8 @@
     <div class="small-box bg-transparent">
       <div classe="inner"></div>
       <p>Seus lucros</p>
-      <h3>R$ 3500,00</h3>
-      <p style="color: deepskyblue;">+12,94%</p>
+      <h3>R$ {{ lucro }}</h3>
+
       <div class="icon">
         <i class="glyphicon glyphicon-usd"></i>
       </div>
@@ -98,17 +98,6 @@
         >
           Realiza Lançamento
         </button>
-      </div>
-    </div>
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Calendário de metas</h3>
-      </div>
-      <div class="box-body">
-        <p-fullCalendar
-          [events]="events"
-          [options]="optionsCalendar"
-        ></p-fullCalendar>
       </div>
     </div>
 
