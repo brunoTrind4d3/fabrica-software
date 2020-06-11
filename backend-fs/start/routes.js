@@ -25,6 +25,9 @@ Route.put("user", "UserController.update").middleware(["auth"]);
 Route.put("address", "AddressController.update").middleware(["auth"]);
 Route.get("address", "AddressController.index").middleware(["auth"]);
 
+Route.put("vehicle", "VehicleController.update").middleware(["auth"]);
+Route.get("vehicle", "VehicleController.index").middleware(["auth"]);
+
 Route.put("estatistica", "EstatisticaController.redefinirMeta").middleware([
   "auth",
 ]);

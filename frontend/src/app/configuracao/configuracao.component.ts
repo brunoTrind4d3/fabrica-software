@@ -57,6 +57,7 @@ export class ConfiguracaoComponent implements OnInit {
     this.carregarEstados();
     this.carregarMarcas();
     this.carregarUsuario();
+    this.carregarVeiculo();
   }
 
   carregarEstados() {
@@ -104,11 +105,29 @@ export class ConfiguracaoComponent implements OnInit {
     this.cidade.nome = this.endereco.cidade;
   }
 
+  async carregarVeiculo() {
+    const response = await api.get("/vehicle");
+    const {
+      ano,
+      ipva,
+      manutencao,
+      placa,
+      quilometragem,
+      marca,
+      modelo,
+    } = response.data;
+    this.veiculo.ano = ano;
+    this.veiculo.ipva = ipva;
+    this.veiculo.manutencao = manutencao;
+    this.veiculo.placa = placa;
+    this.veiculo.quilometragem = quilometragem;
+    this.veiculo.marca = marca;
+    this.veiculo.modelo = modelo;
+  }
+
   async alterarUsuario() {
     this.endereco.uf = this.estado.sigla;
     this.endereco.cidade = this.cidade.nome;
-    console.log(JSON.stringify(this.usuario));
-    console.log(JSON.stringify(this.endereco));
 
     const responseUser = await api.put("/user", this.usuario);
     const responseAddress = await api.put("/address", this.endereco);
@@ -129,9 +148,24 @@ export class ConfiguracaoComponent implements OnInit {
     }
   }
 
-  alterarVeiculo() {
+  async alterarVeiculo() {
     this.veiculo.marca = this.marca.id;
     this.veiculo.modelo = this.modelo.name;
     console.log(JSON.stringify(this.veiculo));
+    const responseVehicle = await api.put("/vehicle", this.veiculo);
+    if (responseVehicle.status === 200) {
+      Swal.fire({
+        title: "Sucesso",
+        text: "Sucesso ao atualizar os dados!",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Erro",
+        text: "Falha ao atualizar os dados!",
+        icon: "error",
+        showCancelButton: true,
+      });
+    }
   }
 }

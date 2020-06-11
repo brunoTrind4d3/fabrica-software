@@ -2,6 +2,7 @@
 const { getMonth, getDayOfYear, format } = require("date-fns");
 const Estatistica = use("App/Models/Estatistica");
 const User = use("App/Models/User");
+const Vehicle = use("App/Models/Vehicle");
 
 class EstatisticaController {
   async redefinirMeta({ request, auth }) {
@@ -104,6 +105,9 @@ class EstatisticaController {
       return getMonth(lancamento.created_at) === getMonth(new Date());
     });
 
+    const veiculo = await Vehicle.findBy("user_id", auth.user.id);
+    const ipvaDia = parseInt(veiculo.ipva) / 365;
+    const manutencaoDia = parseInt(veiculo.manutencao) / 30;
     const lucros = [];
 
     mes.map((m) => {
@@ -113,7 +117,9 @@ class EstatisticaController {
     const gastos = [];
     mes.map((m) => {
       gastos.push(
-        (m.quilometrosRodados / m.consumoVeiculo) * m.valorCombustivel
+        (m.quilometrosRodados / m.consumoVeiculo) * m.valorCombustivel +
+          ipvaDia +
+          manutencaoDia
       );
     });
 
