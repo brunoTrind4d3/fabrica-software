@@ -28,15 +28,17 @@ class EstatisticaController {
       horasTrabalhadas,
     } = request.all();
     const user_id = auth.user.id;
-    const { created_at } = await Estatistica.last(user_id);
+    const est = await Estatistica.last(user_id);
     const novaData = new Date();
-    console.log(getDayOfYear(created_at));
-    console.log(getDayOfYear(novaData));
-    if (getDayOfYear(created_at) === getDayOfYear(novaData)) {
-      return response
-        .status(400)
-        .json({ error: "Lancamento diario ja realizado" });
+    if (est) {
+      const { created_at } = est;
+      if (getDayOfYear(created_at) === getDayOfYear(novaData)) {
+        return response
+          .status(400)
+          .json({ error: "Lancamento diario ja realizado" });
+      }
     }
+    //
     const receita = receitaObtida;
     const lancamento = await Estatistica.create({
       user_id,
@@ -60,6 +62,10 @@ class EstatisticaController {
       return getMonth(lancamento.created_at) === getMonth(new Date());
     });
 
+    const veiculo = await Vehicle.findBy("user_id", auth.user.id);
+    const ipvaDia = parseInt(veiculo.ipva) / 365;
+    const manutencaoDia = parseInt(veiculo.manutencao) / 30;
+
     const lucros = [];
 
     mes.map((m) => {
@@ -69,7 +75,9 @@ class EstatisticaController {
     const gastos = [];
     mes.map((m) => {
       gastos.push(
-        (m.quilometrosRodados / m.consumoVeiculo) * m.valorCombustivel
+        (m.quilometrosRodados / m.consumoVeiculo) * m.valorCombustivel +
+          ipvaDia +
+          manutencaoDia
       );
     });
 
@@ -96,7 +104,7 @@ class EstatisticaController {
     return { data };
   }
 
-  async calcularLucro(request, response) {
+  async calcularLucro({ request, response, auth }) {
     const { id } = request.params;
 
     const lancamentos = await Estatistica.query().where("user_id", id).fetch();
