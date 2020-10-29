@@ -38,7 +38,7 @@ class EstatisticaController {
           .json({ error: "Lancamento diario ja realizado" });
       }
     }
-    //
+
     const receita = receitaObtida;
     const lancamento = await Estatistica.create({
       user_id,
@@ -63,13 +63,13 @@ class EstatisticaController {
     });
 
     const veiculo = await Vehicle.findBy("user_id", auth.user.id);
-    const ipvaDia = parseInt(veiculo.ipva) / 365;
-    const manutencaoDia = parseInt(veiculo.manutencao) / 30;
+    const ipvaDia = new Number(veiculo.ipva) / 365;
+    const manutencaoDia = new Number(veiculo.manutencao) / 30;
 
     const lucros = [];
 
     mes.map((m) => {
-      lucros.push(parseInt(m.receita));
+      lucros.push(new Number(m.receita));
     });
 
     const gastos = [];
@@ -136,13 +136,11 @@ class EstatisticaController {
       lucroTotal += parseInt(l);
     });
 
-    console.log(lucroTotal);
     let gastoTotal = 0;
     gastos.map((g) => {
       gastoTotal += parseInt(g);
     });
 
-    console.log(gastoTotal);
     return lucroTotal - gastoTotal;
   }
 }
