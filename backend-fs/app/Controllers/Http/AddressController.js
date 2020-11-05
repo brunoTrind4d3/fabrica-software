@@ -8,10 +8,11 @@ class AddressController {
   }
 
   async update({ request, auth }) {
-    const { logradouro, complemento, uf, cidade } = request.all();
+    const { logradouro, complemento, uf, cidade, cep } = request.all();
     const address = await Address.findBy("user_id", auth.user.id);
     if (!address) {
       const create = await Address.create({
+        cep,
         logradouro,
         complemento,
         uf,
@@ -20,6 +21,7 @@ class AddressController {
       });
       return create;
     }
+    address.cep = cep;
     address.logradouro = logradouro;
     address.complemento = complemento;
     address.uf = uf;

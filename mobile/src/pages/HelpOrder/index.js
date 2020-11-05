@@ -20,21 +20,9 @@ function HelpOrder({ isFocused, navigation }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function loadHelpOrders() {
-      try {
-        setLoading(true);
-
-        //       const { data } = await api.get(`/students/${id}/help-orders`);
-
-        //       setHelpOrders(data);
-        //     } catch (err) {
-        Alert.alert('Help Orders', err.response.data.error);
-      } finally {
-        setLoading(false);
-      }
+    if (isFocused) {
+      setLoading(false);
     }
-
-    if (isFocused) loadHelpOrders();
   }, [isFocused]); // eslint-disable-line
 
   return (
@@ -42,19 +30,24 @@ function HelpOrder({ isFocused, navigation }) {
       {loading ? (
         <Loading />
       ) : (
-        <Container>
+        <Container
+          style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
+        >
           <Button
+            style={{ marginBottom: 10 }}
             onPress={() => {
               navigation.navigate('NewQuestion');
             }}
           >
-            Novo pedido de auxílio
+            Opções de usuário
           </Button>
-          {/* <List
-            data={helpOrders}
-            keyExtractor={item => String(item.id)}
-            renderItem={({ item }) => <HelpOrderItem data={item} />}
-          /> */}
+          <Button
+            onPress={() => {
+              navigation.navigate('OptionVehicle');
+            }}
+          >
+            Opções de veículo
+          </Button>
         </Container>
       )}
     </Background>

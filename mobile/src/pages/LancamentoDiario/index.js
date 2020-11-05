@@ -9,7 +9,7 @@ import Input from '~/components/Input';
 import Loading from '~/components/Loading';
 import LogoHeader from '~/components/LogoHeader';
 
-import { Container, Form, SubmitButton } from './styles';
+import { Container, Form, SubmitButton, Card } from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import api from '~/services/api';
 
@@ -22,6 +22,17 @@ const style = StyleSheet.create({
   },
   teste: {
     marginBottom: 5,
+  },
+  card: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
 });
 

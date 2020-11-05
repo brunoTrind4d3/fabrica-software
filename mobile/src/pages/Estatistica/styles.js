@@ -10,3 +10,11 @@ export const List = styled.FlatList.attrs({
 })`
   margin-top: 20px;
 `;
+
+export const Card = styled.View`
+  margin: 0;
+  border-radius: 4px;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 10px;
+`;

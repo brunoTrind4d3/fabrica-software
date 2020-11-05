@@ -57,7 +57,12 @@ class EstatisticaController {
     const { id } = auth.user;
 
     const lancamentos = await Estatistica.query().where("user_id", id).fetch();
-
+    if (!lancamentos) {
+      return response.status(400).json({
+        error:
+          "Não foi possível finalizar os dados dos gráficos, favor finalize o cadastro",
+      });
+    }
     const mes = lancamentos.rows.filter((lancamento) => {
       return getMonth(lancamento.created_at) === getMonth(new Date());
     });
@@ -108,7 +113,12 @@ class EstatisticaController {
     const { id } = request.params;
 
     const lancamentos = await Estatistica.query().where("user_id", id).fetch();
-
+    if (!lancamentos) {
+      return response.status(400).json({
+        error:
+          "Não foi possível finalizar os dados de lucros, favor finalize o cadastro!",
+      });
+    }
     const mes = lancamentos.rows.filter((lancamento) => {
       return getMonth(lancamento.created_at) === getMonth(new Date());
     });

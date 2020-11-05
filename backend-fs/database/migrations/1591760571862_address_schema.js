@@ -8,7 +8,7 @@ class AddressSchema extends Schema {
     this.create("addresses", (table) => {
       table.increments();
       table.integer("user_id").references("users.id");
-
+      table.string("cep").nullable();
       table.string("logradouro").nullable();
       table.string("complemento").nullable();
       table.string("uf").nullable();

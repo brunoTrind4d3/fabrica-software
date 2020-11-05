@@ -7,10 +7,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Estatistica from '~/pages/Estatistica';
-import Option from '~/pages/Option';
+import OptionVehicle from '~/pages/HelpOrder/OptionVehicle';
 import LancamentoDiario from '~/pages/LancamentoDiario';
 import HelpOrder from '~/pages/HelpOrder';
-import ShowAnswer from '~/pages/HelpOrder/ShowAnswer';
 import NewQuestion from '~/pages/HelpOrder/NewQuestion';
 
 export default (signedIn = false) =>
@@ -55,31 +54,7 @@ export default (signedIn = false) =>
                 ),
               },
             },
-            // HelpOrders: {
-            //   screen: createStackNavigator(
-            //     {
-            //       HelpOrder,
-            //       ShowAnswer,
-            //       NewQuestion,
-            //     },
-            //     {
-            //       defaultNavigationOptions: {
-            //         headerTransparent: false,
-            //         headerTintColor: '#EE4E62',
-            //         headerTitleAlign: 'center',
-            //         headerLeftContainerStyle: {
-            //           marginLeft: 20,
-            //         },
-            //       },
-            //     }
-            //   ),
-            //   navigationOptions: {
-            //     tabBarLabel: 'Lançamento diário',
-            //     tabBarIcon: ({ tintColor }) => (
-            //       <Icon name="rocket" size={20} color={tintColor} />
-            //     ),
-            //   },
-            // },
+
             LancamentosDiarios: {
               screen: createStackNavigator(
                 {
@@ -103,10 +78,12 @@ export default (signedIn = false) =>
                 ),
               },
             },
-            Options: {
+            HelpOrders: {
               screen: createStackNavigator(
                 {
-                  Option,
+                  HelpOrder,
+                  OptionVehicle,
+                  NewQuestion,
                 },
                 {
                   defaultNavigationOptions: {
@@ -120,9 +97,9 @@ export default (signedIn = false) =>
                 }
               ),
               navigationOptions: {
-                tabBarLabel: 'Redefinir Meta',
+                tabBarLabel: 'Opções',
                 tabBarIcon: ({ tintColor }) => (
-                  <Icon name="currency-usd" size={20} color={tintColor} />
+                  <Icon name="cogs" size={20} color={tintColor} />
                 ),
               },
             },
