@@ -26,6 +26,7 @@ class UserController {
     await user.save();
 
     const newUser = await User.findBy("id", auth.user.id);
+    
 
     return { newUser };
   }
